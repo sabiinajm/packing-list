@@ -112,8 +112,12 @@ function Main() {
                 <button onClick={clearAllItems} className="hover:underline">clear list</button>
             </div>
             <div className="min-h-[70px] text-white flex justify-center items-center bg-[#7f5af0]">
-                <h2>💼You have {items.length} items on your list, and you already packed {checkedItems.filter(checked => checked).length} ({Math.round((checkedItems.filter(checked => checked).length / items.length) * 100)}%)</h2>
+                <h2>
+                    💼You have {items.length} items on your list, and you already packed {checkedItems.filter(checked => checked).length} 
+                    ({items.length > 0 ? Math.round((checkedItems.filter(checked => checked).length / items.length) * 100) : 0}  %)
+                </h2>
             </div>
+
         </main>
     );
 }

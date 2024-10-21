@@ -3,7 +3,7 @@ import { MdDelete } from "react-icons/md";
 
 const List = ({ items, checkedItems, handleCheckbox, selectedOptions, handleDel }) => {
     return (
-        <div className="min-h-[200px] text-white py-8">
+        <div className="min-h-[200px] h-[50vh] text-white py-8">
             <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-[90%] mx-auto">
                 {items.length > 0
                     ? items.map((item, index) => (

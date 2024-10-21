@@ -1,13 +1,14 @@
 import React from "react";
 
-const Input = ({ input, setInput, handleAddItem, selectedOptions, handleSelectChange, opt }) => {
+const Input = ({ input, setInput, handleAddItem, selectedOptions, handleSelectChange, opt, index }) => {
     return (
         <div className="bg-[#16161a] w-full gap-4 flex flex-wrap justify-center items-center min-h-[120px] py-11">
             <span className="text-white">What do you need for your trip 😍?</span>
             <div className="flex flex-wrap justify-center gap-3 text-[#2cb67d]">
                 <select
-                    onChange={(e) => handleSelectChange(selectedOptions.length, e.target.value)}
-                    className=" h-[30px]  w-[200px]  sm:w-[60px] bg-[#363b41] rounded-md"
+                    value={selectedOptions[index] || 0}
+                    onChange={(e) => handleSelectChange(index, parseInt(e.target.value))}
+                    className="h-[30px] w-[200px] sm:w-[60px] bg-[#363b41] rounded-md"
                 >
                     {opt.map(item => (
                         <option key={item} value={item}>

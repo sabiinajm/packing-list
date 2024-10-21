@@ -3,7 +3,7 @@ import Input from "./Input";
 import List from "./List";
 
 function Main() {
-    const opt = Array(21).fill("").map((_, i) => i)
+    const opt = Array.from({ length: 21 }, (_, i) => i);
     const [input, setInput] = useState('')
     const [items, setItems] = useState([])
     const [checkedItems, setCheckedItems] = useState([])
@@ -12,13 +12,15 @@ function Main() {
 
     const handleAddItem = () => {
         if (input.trim()) {
-            setItems([...items, input])
-            setCheckedItems(prevChecked => [...prevChecked, false]);
-            setInput('')
+            setItems(prevItems => [...prevItems, input]);
+            setCheckedItems(prevChecked => [...prevChecked, false])
+            setSelectedOptions((prevOptions) => [...prevOptions, 0]);
+            setInput('');
         } else {
-            alert('Input cannot be empty!')
+            alert('Input cannot be empty!');
         }
     };
+    
 
     const handleCheckbox = (index) => {
         setCheckedItems(checkedItems => {
@@ -69,12 +71,8 @@ function Main() {
             sortedItems = [...packedItems, ...unpackedItems]
             sortedCheckedItems = [...sortedCheckedItems.filter((_, index) => sortedCheckedItems[index]), ...sortedCheckedItems.filter((_, index) => !sortedCheckedItems[index])]
             sortedSelectedOptions = [...sortedSelectedOptions.filter((_, index) => sortedCheckedItems[index]), ...sortedSelectedOptions.filter((_, index) => !sortedCheckedItems[index])]
-        } else if (order === "input") {
-            sortedItems = [...originalItems]
-            sortedCheckedItems = [...checkedItems]
-            sortedSelectedOptions = [...selectedOptions]
         }
-
+        
         setItems(sortedItems)
         setCheckedItems(sortedCheckedItems)
         setSelectedOptions(sortedSelectedOptions)
@@ -88,14 +86,15 @@ function Main() {
 
     return (
         <main className="bg-[#010101]">
-            <Input 
-                input={input}
-                setInput={setInput}
-                handleAddItem={handleAddItem}
-                selectedOptions={selectedOptions}
-                handleSelectChange={handleSelectChange}
-                opt={opt}
-            />
+                <Input 
+                    input={input}
+                    setInput={setInput}
+                    handleAddItem={handleAddItem}
+                    selectedOptions={selectedOptions}
+                    handleSelectChange={handleSelectChange}
+                    opt={opt}
+                    index={items.length}
+                />
             <List 
                 items={items}
                 checkedItems={checkedItems}
